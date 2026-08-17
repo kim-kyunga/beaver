@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "A REG2026 challenge paper describing this work is in preparation; please cite it once available."
+title: "BEAVER: Perception-Grounded, Structured Chain-of-Thought for Whole-Slide Pathology"
+authors:
+  - name: "Anonymous Authors (double-blind review)"
+license: Apache-2.0
+# TODO (camera-ready): replace authors with the real list and add the paper DOI/URL.

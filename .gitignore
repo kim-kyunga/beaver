@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.ipynb_checkpoints/
+# weights & data are NOT tracked (see README for download)
+model/
+data/
+*.pth
+*.pt
+*.ckpt
+*.bin
+*.h5
+*.npy
+*.pkl
+*.joblib
+*.tar.gz
+# exception: ship the small trained-weights bundle in-repo (44 MB, < GitHub limit)
+!weights/containerA7_model_slim.tar.gz
+image_cache/
+# training runtime artifacts
+training/slot_abmil/imgs/
+training/slot_abmil/outputs/
+training/slot_abmil/multirun/

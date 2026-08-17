@@ -1,0 +1,83 @@
+defaults:
+  - _self_
+  - app_cfg
+
+training:
+  epochs: 150
+  bag_size: 1024
+  batch_size: 16
+  train_data_part: 0.75
+  precision: fp16
+  start_lr: 4e-5
+  seed: 42
+  max_grad_norm: 10
+  weight_decay: 1e-4
+
+model:
+  train_device: "cuda:0"
+  eval_device: "cuda:1"
+  num_channels: 256
+  embed_dim: 128
+  ff_dim: 128
+  num_blocks: 4
+  num_layers_transformer: 4
+  num_heads_transformer: 4
+  num_attention_heads_abmil: 4
+  num_layers_abmil: 3
+  dropout_abmil: 0.5
+  slide_feature_encoder_dim: 1024
+  trainable_pos_emb: true
+  model_checkpoint: null
+
+data:
+  data_suffix: ".h5"
+  max_num_datapoints: null
+  train_json_path: "./data/train_from_CoT.json"
+  # train_data_path: "./data/features_titan"
+  # experiment_path: "./experiments/run_titan"
+  train_data_path: "./data/features"
+  experiment_path: "./experiments/run"
+  experiment_name: ""
+  site_count_threshold: 10
+  extraction_count_threshold: 10
+  normalize: false
+  mean: [0.9505, 0.9375, 0.9510]
+  std: [0.0762, 0.1088, 0.0727]
+
+  # ─── slot supervision ─────────────────────────────────────────────────────
+  # baseline 그대로 돌리려면: use_slot_supervision: false
+  # slot 실험 두 가지:
+  #   1) merged   : Rectum/Anus→Colon, Nipple→Breast (7 organ head)
+  #   2) separate : 모든 organ 단독 (site filter 통과한 organ만, 보통 8개)
+  use_slot_supervision: true
+  organ_grouping: "merged"   # "merged" or "separate"
+  slot_cot_dir: "./data/train_CoT_organ"
+  # organ_grouping=separate 사용 시:
+  #   slot_cot_dir: "./data/train_CoT_organ_separate"
+  slot_skip_first_n: 2   # Q01(organ), Q02(procedure) skip — site/extraction head와 중복
+  slot_skip_last_n: 1    # final diagnosis skip — sparse + decoder와 중복
+  slot_loss_weight: 1.0
+
+dataloader:
+  num_workers: 16
+  pin_memory: false
+  drop_last: false
+  prefetch_factor: 2
+
+text:
+  pad_idx: 0
+  sos_idx: 1
+  eos_idx: 2
+  n_gram: 10
+
+other:
+  dry_run: false
+  verbose: true
+  disable_TQDM: false
+
+eval:
+  run_text: false
+  run_embedding: false
+  save_json: true
+  eval_rate: 50
+  test_data_path: null

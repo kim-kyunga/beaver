@@ -1,0 +1,7 @@
+BEAVER
+Copyright 2026 The BEAVER Authors
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product adapts the report-retrieval component of the NARWHAL project
+(https://github.com/icgi/NARWHAL, REG2025 challenge), licensed under the
+Apache License, Version 2.0, and adds case-derived reasoning-chain retrieval.
