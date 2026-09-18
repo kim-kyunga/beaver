@@ -1,0 +1,10 @@
+[
+  {
+    "socket": {
+      "slug": "whole-slide-image",
+      "relative_path": "images/whole-slide-image",
+      "is_image_kind": true
+    },
+    "image": {"name": "your-slide.tiff"}
+  }
+]
